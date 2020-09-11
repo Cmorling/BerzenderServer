@@ -83,6 +83,20 @@ class Commands():
             'code': '200',
         }
 
+    def getPublicKey(self, command):
+        if not command['body']['username']:
+            return({'code': '400', 'message': 'Missing Parameters'})
+        userId = self._db.handleQuery(
+            (command['body']['username'],), 'getUserbyUsername')
+        if len(userId) == 0:
+            return({'code': '400', 'message': 'Username Does not match any records'})
+        pubKey = self._db.handleQuery(
+            (userId[0][0],), 'getPublicKey')
+        return {
+            'code': '200',
+            'response': pubKey,
+        }
+
     def sendMessage(self, command):
         if not command['body']['message'] or not command['body']['recipitentId'] or not command['body']['date'] or not command['session'] or not command['body']['username']:
             return({'code': '400', 'message': 'Missing Parameters'})

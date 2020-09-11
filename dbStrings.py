@@ -32,7 +32,8 @@ querys = {
     'getPassword': 'SELECT password FROM users WHERE userId=?',
     'getMessages': 'SELECT * FROM messages WHERE recipitentId=?',
     'getCurrentSession': 'SELECT session FROM users WHERE userId=?',
-    'searchForUser': 'SELECT username, userId, publicKey FROM users WHERE username LIKE ?'
+    'searchForUser': 'SELECT username, userId FROM users WHERE username LIKE ?',
+    'getPublicKey': 'SELECT publicKey FROM users WHERE userId=?'
 }
 
 updates = {
