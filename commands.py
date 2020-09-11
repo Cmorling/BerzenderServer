@@ -102,7 +102,6 @@ class Commands():
             return({'code': '400', 'message': 'Missing Parameters'})
         userId = self._db.handleQuery(
             (command['body']['username'],), 'getUserbyUsername')
-        print(len(userId))
         if len(userId) == 0:
             return({'code': '400', 'message': 'Username Does not match any records'})
         session = self._db.handleQuery(
@@ -156,7 +155,6 @@ class Commands():
             (userId[0][0],), 'getCurrentSession')
         if session[0][0] != command['session']:
             return({'code': '401', 'message': 'No session established'})
-        print(command)
         self._db.handleMutation(
             (command['body']['sender'], userId[0][0]), 'deleteMessages')
 
